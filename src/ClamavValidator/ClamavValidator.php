@@ -1,7 +1,7 @@
 <?php namespace Sunspikes\ClamavValidator;
 
 use Illuminate\Validation\Validator;
-use Quahog\Client;
+use Xenolope\Quahog\Client;
 use Socket\Raw\Factory;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -52,7 +52,7 @@ class ClamavValidator extends Validator
         $socket = (new Factory())->createClient($clamavSocket);
 
         // Create a new instance of the Client
-        $quahog = new Client($socket);
+        $quahog = new Client($socket, 30, PHP_NORMAL_READ);
 
         // Scan the file
         $result = $quahog->scanFile($file);
