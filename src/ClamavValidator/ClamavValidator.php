@@ -48,8 +48,11 @@ class ClamavValidator extends Validator
         $file = $this->getFilePath($value);
         $clamavSocket = $this->getClamavSocket();
 
-        // Create a new socket instance
-        $socket = (new Factory())->createClient($clamavSocket);
+        try {
+            $socket = (new Factory())->createClient($clamavSocket);
+        } catch (\Exception $e) {
+            throw new Exception('Unable to initiate a virus check.');
+        }
 
         // Create a new instance of the Client
         $quahog = new Client($socket, 30, PHP_NORMAL_READ);
