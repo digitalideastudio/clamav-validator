@@ -51,7 +51,7 @@ class ClamavValidator extends Validator
         try {
             $socket = (new Factory())->createClient($clamavSocket);
         } catch (\Exception $e) {
-            throw new Exception('Unable to initiate a virus check.');
+            throw new \Exception('Unable to initiate a virus check.');
         }
 
         // Create a new instance of the Client
