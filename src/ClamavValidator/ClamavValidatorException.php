@@ -26,7 +26,10 @@ class ClamavValidatorException extends ValidationException
 
         if (request()->expectsJson()) {
             return response()->json([
-                $this->attribute => $message
+                'errors' => [
+                    $this->attribute => $message
+                ],
+                'message' => $message
             ], 422);
         }
 
