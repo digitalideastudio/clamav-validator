@@ -1,11 +1,11 @@
 # ClamAV Validator For Laravel 5
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/80f28825-1385-4daa-aaad-0e4c6b6b3910/mini.png)](https://insight.sensiolabs.com/projects/80f28825-1385-4daa-aaad-0e4c6b6b3910)
-[![Code Coverage](https://scrutinizer-ci.com/g/sunspikes/clamav-validator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sunspikes/clamav-validator/?branch=master)
-[![Code Quality](https://scrutinizer-ci.com/g/sunspikes/clamav-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sunspikes/clamav-validator)
-[![Build Status](https://travis-ci.org/sunspikes/clamav-validator.svg?branch=master)](https://travis-ci.org/sunspikes/clamav-validator) 
-[![Latest Stable Version](https://poser.pugx.org/sunspikes/clamav-validator/v/stable)](https://packagist.org/packages/sunspikes/clamav-validator)
-[![License](https://poser.pugx.org/sunspikes/clamav-validator/license)](https://packagist.org/packages/sunspikes/clamav-validator)
+[![Code Coverage](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sunspikes/clamav-validator/?branch=master)
+[![Code Quality](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digitalidea/clamav-validator)
+[![Build Status](https://travis-ci.org/digitalidea/clamav-validator.svg?branch=master)](https://travis-ci.org/digitalidea/clamav-validator) 
+[![Latest Stable Version](https://poser.pugx.org/digitalidea/clamav-validator/v/stable)](https://packagist.org/packages/digitalidea/clamav-validator)
+[![License](https://poser.pugx.org/digitalideadigitalidea/clamav-validator/license)](https://packagist.org/packages/sunspikes/clamav-validator)
 
 Custom Laravel 5 anti-virus validator for file uploads.
 
@@ -44,20 +44,20 @@ This package is not tested on windows, but if you have ClamAV running (usually o
 #### 1. Install the package through [Composer](http://getcomposer.org).
    
    ```bash
-   $ composer require sunspikes/clamav-validator
+   $ composer require di/clamav-validator
    ```
 
 #### 2. Add the service provider (for Laravel 5.4 or below)
 
 This package supports Laravel new [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery).
     
-If you are using Laravel < 5.5, you need to add `Sunspikes\ClamavValidator\ClamavValidatorServiceProvider::class` to your `providers` array in `config/app.php`:
+If you are using Laravel < 5.5, you need to add `DI\ClamavValidator\ClamavValidatorServiceProvider::class` to your `providers` array in `config/app.php`:
 
 ```php
 'providers' => array(
 	// ...
 
-	Sunspikes\ClamavValidator\ClamavValidatorServiceProvider::class,
+	DI\ClamavValidator\ClamavValidatorServiceProvider::class,
 ),
 ```
 
@@ -80,8 +80,6 @@ By default the package will try to connect the clamav daemon via the default soc
 But you can set the `CLAMAV_UNIX_SOCKET` (socket file path) or `CLAMAV_TCP_SOCKET` (host:port) environment variables to override this.
 
 <a name="author"></a>
-## Author
-
+## Credits
 Krishnaprasad MG [@sunspikes]
 
-_Contact me at [sunspikes at gmail dot com]_
