@@ -1,11 +1,11 @@
 # ClamAV Validator For Laravel 5
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/80f28825-1385-4daa-aaad-0e4c6b6b3910/mini.png)](https://insight.sensiolabs.com/projects/80f28825-1385-4daa-aaad-0e4c6b6b3910)
-[![Code Coverage](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sunspikes/clamav-validator/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/?branch=master)
 [![Code Quality](https://scrutinizer-ci.com/g/digitalidea/clamav-validator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digitalidea/clamav-validator)
 [![Build Status](https://travis-ci.org/digitalidea/clamav-validator.svg?branch=master)](https://travis-ci.org/digitalidea/clamav-validator) 
 [![Latest Stable Version](https://poser.pugx.org/digitalidea/clamav-validator/v/stable)](https://packagist.org/packages/digitalidea/clamav-validator)
-[![License](https://poser.pugx.org/digitalideadigitalidea/clamav-validator/license)](https://packagist.org/packages/sunspikes/clamav-validator)
+[![License](https://poser.pugx.org/digitalideadigitalidea/clamav-validator/license)](https://packagist.org/packages/digitalidea/clamav-validator)
 
 Custom Laravel 5 anti-virus validator for file uploads.
 
