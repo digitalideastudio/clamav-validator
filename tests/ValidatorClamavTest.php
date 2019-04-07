@@ -1,11 +1,11 @@
 <?php
 
-namespace Sunspikes\Tests\ClamavValidator;
+namespace DI\Tests\ClamavValidator;
 
 use Mockery;
 use Illuminate\Contracts\Translation\Translator;
-use Sunspikes\ClamavValidator\ClamavValidator;
-use Sunspikes\ClamavValidator\ClamavValidatorException;
+use DI\ClamavValidator\ClamavValidator;
+use DI\ClamavValidator\ClamavValidatorException;
 
 class ValidatorClamavTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Sunspikes\Tests\ClamavValidator;
+namespace DI\Tests\ClamavValidator;
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Translation\Translator;
@@ -8,8 +8,8 @@ use Illuminate\Validation\PresenceVerifierInterface;
 use Mockery;
 use Illuminate\Validation\Factory;
 use Illuminate\Support\Str;
-use Sunspikes\ClamavValidator\ClamavValidator;
-use Sunspikes\ClamavValidator\ClamavValidatorServiceProvider;
+use DI\ClamavValidator\ClamavValidator;
+use DI\ClamavValidator\ClamavValidatorServiceProvider;
 
 class ValidatorServiceProviderTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,4 +1,4 @@
-<?php namespace Sunspikes\ClamavValidator;
+<?php namespace DI\ClamavValidator;
 
 use Illuminate\Contracts\Translation\Translator;
 use Xenolope\Quahog\Client;
