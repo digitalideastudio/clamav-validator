@@ -12,7 +12,7 @@ Custom Laravel 5 anti-virus validator for file uploads.
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Change Log](#changelog)
+* [Configuration](#configuration)
 * [Author](#author)
 
 <a name="requirements"></a> 
@@ -41,11 +41,17 @@ This package is not tested on windows, but if you have ClamAV running (usually o
 <a name="installation"></a>
 ## Installation
 
-Install the package through [Composer](http://getcomposer.org).
+#### 1. Install the package through [Composer](http://getcomposer.org).
+   
+   ```bash
+   $ composer require sunspikes/clamav-validator
+   ```
 
-Run `composer require digitalideastudio/clamav-validator`
+#### 2. Add the service provider (for Laravel 5.4 or below)
 
-Add the following to your `providers` array in `config/app.php`:
+This package supports Laravel new [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery).
+    
+If you are using Laravel < 5.5, you need to add `Sunspikes\ClamavValidator\ClamavValidatorServiceProvider::class` to your `providers` array in `config/app.php`:
 
 ```php
 'providers' => array(
@@ -66,18 +72,12 @@ $rules = array(
 );
 ```
 
-<a name="changelog"></a>
-## Change Log
+<a name="configuration"></a>
+## Configuration
 
-2014.12.05 - Initial version, using extension php-clamav
+By default the package will try to connect the clamav daemon via the default socket file (/var/run/clamav/clamd.ctl) and if it fails it will try the tcp port (127.0.0.1:3310)
 
-2014.12.05 - Removed the dependency php-clamav, Now using [Quahog](https://github.com/jonjomckay/quahog)
-
-2015.10.20 - Updated for Laravel 5
-
-2015.11.20 - Updated to use PSR-4
-
-2015.12.03 - Added limited windows support
+But you can set the `CLAMAV_UNIX_SOCKET` (socket file path) or `CLAMAV_TCP_SOCKET` (host:port) environment variables to override this.
 
 <a name="author"></a>
 ## Author

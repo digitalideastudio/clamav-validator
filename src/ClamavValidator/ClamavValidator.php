@@ -1,11 +1,11 @@
 <?php namespace Sunspikes\ClamavValidator;
 
-use Illuminate\Validation\Validator;
+use Illuminate\Contracts\Translation\Translator;
 use Xenolope\Quahog\Client;
 use Socket\Raw\Factory;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ClamavValidator extends Validator
+class ClamavValidator
 {
     /**
      * @const string CLAMAV_STATUS_OK
@@ -28,59 +28,45 @@ class ClamavValidator extends Validator
     const CLAMAV_LOCAL_TCP_SOCKET = 'tcp://127.0.0.1:3310';
 
     /**
-     * Creates a new instance of ClamavValidator
+     * @const string CLAMAV_SOCKET_READ_TIMEOUT
      */
-    public function __construct($translator, $data, $rules, $messages)
-    {
-        parent::__construct($translator, $data, $rules, $messages);
-    }
+    const CLAMAV_SOCKET_READ_TIMEOUT = 30;
 
     /**
      * Validate the uploaded file for virus/malware with ClamAV
      *
-     * @param  $attribute  string
+     * @param  $attribute   string
      * @param  $value       mixed
-     * @param  $parameters array
+     * @param  $parameters  array
+     *
      * @return boolean
+     * @throws ClamavValidatorException
      */
     public function validateClamav($attribute, $value, $parameters)
     {
         $file = $this->getFilePath($value);
-
         $clamavSocket = $this->getClamavSocket();
 
-        try {
-            $socket = (new Factory())->createClient($clamavSocket);
-        } catch (\Exception $e) {
-            throw new ClamavValidatorException($e, $attribute, $this);
-        }
+        // Create a new socket instance
+        $socket = (new Factory())->createClient($clamavSocket);
 
         // Create a new instance of the Client
-        $quahog = new Client($socket, 30, PHP_NORMAL_READ);
+        $quahog = new Client($socket, self::CLAMAV_SOCKET_READ_TIMEOUT, PHP_NORMAL_READ);
 
-        // Ensure that clamav user is able to read the file
-        $oldPerms = fileperms($file);
-        chmod($file, 0666);
-        clearstatcache(true, $file);
+        // Check if the file is readable
+        if (! is_readable($file)) {
+            throw new ClamavValidatorException(sprintf('The file "%s" is not readable', $file));
+        }
 
         // Scan the file
-        $result = $quahog->scanFile($file);
-
-        // Restore permissions
-        chmod($file, $oldPerms);
-        clearstatcache(true, $file);
-
+        $result = $quahog->scanResourceStream(fopen($file, 'rb'));
 
         if (self::CLAMAV_STATUS_ERROR === $result['status']) {
             throw new ClamavValidatorException($result['reason']);
         }
 
         // Check if scan result is not clean
-        if (self::CLAMAV_STATUS_OK != $result['status']) {
-            return false;
-        }
-
-        return true;
+        return !(self::CLAMAV_STATUS_OK !== $result['status']);
     }
 
     /**
@@ -90,11 +76,11 @@ class ClamavValidator extends Validator
      */
     protected function getClamavSocket()
     {
-        if (file_exists(self::CLAMAV_UNIX_SOCKET)) {
-            return 'unix://' . self::CLAMAV_UNIX_SOCKET;
+        if (file_exists(env('CLAMAV_UNIX_SOCKET', self::CLAMAV_UNIX_SOCKET))) {
+            return 'unix://' . env('CLAMAV_UNIX_SOCKET', self::CLAMAV_UNIX_SOCKET);
         }
 
-        return self::CLAMAV_LOCAL_TCP_SOCKET;
+        return env('CLAMAV_TCP_SOCKET', self::CLAMAV_LOCAL_TCP_SOCKET);
     }
 
     /**

@@ -1,5 +1,5 @@
 {
-    "name": "digitalideastudio/clamav-validator",
+    "name": "sunspikes/clamav-validator",
     "description": "Custom Laravel 5 anti-virus validator for file uploads.",
     "keywords": [
         "laravel",
@@ -7,7 +7,7 @@
         "clamav",
         "virus"
     ],
-    "homepage": "https://github.com/digitalideastudio/clamav-validator",
+    "homepage": "https://github.com/sunspikes/clamav-validator",
     "license": "MIT",
     "authors": [
         {
@@ -16,20 +16,26 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
         "xenolope/quahog": "2.*",
         "illuminate/support": ">=4.2",
-        "laravel/framework": ">=4.2",
         "illuminate/validation": ">=4.1.21"
     },
     "require-dev": {
         "phpunit/phpunit": "4.*",
-        "mockery/mockery": "dev-master",
+        "mockery/mockery": "0.9.*",
         "scrutinizer/ocular": "dev-master"
     },
     "autoload": {
         "psr-4": {
             "Sunspikes\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sunspikes\\ClamavValidator\\ClamavValidatorServiceProvider"
+            ]
         }
     },
     "autoload-dev": {
@@ -38,12 +44,5 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Sunspikes\\ClamavValidator\\ClamavValidatorServiceProvider"
-            ]
-        }
-    }
+    "prefer-stable": true
 }

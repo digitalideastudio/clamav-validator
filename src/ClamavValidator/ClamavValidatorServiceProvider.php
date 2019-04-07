@@ -17,9 +17,9 @@ class ClamavValidatorServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $rules = array(
+    protected $rules = [
         'clamav',
-    );
+    ];
 
     /**
      * Bootstrap the application events.
@@ -31,12 +31,13 @@ class ClamavValidatorServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__ . '/../lang', 'clamav-validator');
 
         $this->app['validator']
-            ->resolver(function ($translator, $data, $rules, $messages) {
+            ->resolver(function ($translator, $data, $rules, $messages, $customAttributes = []) {
                 return new ClamavValidator(
                     $translator,
                     $data,
                     $rules,
-                    $messages
+                    $messages,
+                    $customAttributes
                 );
             });
 
@@ -75,8 +76,8 @@ class ClamavValidatorServiceProvider extends ServiceProvider
     {
         $method = studly_case($rule);
         $translation = $this->app['translator']->get('clamav-validator::validation');
-        $this->app['validator']->extend($rule, 'Sunspikes\ClamavValidator\ClamavValidator@validate' . $method,
-            isset($translation[$rule]) ? $translation[$rule] : array());
+        $this->app['validator']->extend($rule, ClamavValidator::class .'@validate' . $method,
+            isset($translation[$rule]) ? $translation[$rule] : []);
     }
 
 
@@ -97,6 +98,6 @@ class ClamavValidatorServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array();
+        return [];
     }
 }
